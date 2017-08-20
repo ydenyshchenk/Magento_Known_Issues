@@ -5,7 +5,7 @@
 Possibly issue caused by "no selection" values set on store scopes.
 Execute the next command to check it:
 ```sql
-select cpev_s.*, cpev_0.value as store_value from catalog_product_entity_varchar cpev_s join eav_attribute ea on cpev_s.attribute_id = ea.attribute_id left join catalog_product_entity_varchar cpev_0 on cpev_0.row_id = cpev_s.row_id and cpev_0.attribute_id = cpev_s.attribute_id and cpev_0.store_id = 0 where cpev_s.value = 'no_selection' and ea.attribute_code in ('image', 'small_image', 'thumbnail') and cpev_s.store_id > 0 and cpev_s.value != cpev_0.value and cpev_s.value = 'no_selection';
+SELECT `cpev_s`.*, `cpev_0`.`value` AS `store_value` FROM `catalog_product_entity_varchar` `cpev_s` JOIN `eav_attribute` `ea` ON `cpev_s`.`attribute_id` = `ea`.`attribute_id` LEFT JOIN `catalog_product_entity_varchar` `cpev_0` ON `cpev_0`.`row_id` = `cpev_s`.`row_id` AND `cpev_0`.`attribute_id` = `cpev_s`.`attribute_id` AND `cpev_0`.`store_id` = 0 WHERE `cpev_s`.`value` = 'no_selection' AND `ea`.`attribute_code` IN ('image', 'small_image', 'thumbnail') AND `cpev_s`.`store_id` > 0 AND `cpev_s`.`value` != `cpev_0`.`value` AND `cpev_s`.`value` = 'no_selection';
 ```
 It will return something like that if table really has different values on default and store scopes:
 ```sql
@@ -26,5 +26,5 @@ It will return something like that if table really has different values on defau
 ```
 In this case you need to delete these rows by the next SQL command:
 ```sql
-delete cpev_s.* from catalog_product_entity_varchar cpev_s join eav_attribute ea on cpev_s.attribute_id = ea.attribute_id left join catalog_product_entity_varchar cpev_0 on cpev_0.row_id = cpev_s.row_id and cpev_0.attribute_id = cpev_s.attribute_id and cpev_0.store_id = 0 where cpev_s.value = 'no_selection' and ea.attribute_code in ('image', 'small_image', 'thumbnail') and cpev_s.store_id > 0 and cpev_s.value != cpev_0.value and cpev_s.value = 'no_selection';
+DELETE `cpev_s`.* FROM `catalog_product_entity_varchar` `cpev_s` JOIN `eav_attribute` `ea` ON `cpev_s`.`attribute_id` = `ea`.`attribute_id` LEFT JOIN `catalog_product_entity_varchar` `cpev_0` ON `cpev_0`.`row_id` = `cpev_s`.`row_id` AND `cpev_0`.`attribute_id` = `cpev_s`.`attribute_id` AND `cpev_0`.`store_id` = 0 WHERE `cpev_s`.`value` = 'no_selection' AND `ea`.`attribute_code` IN ('image', 'small_image', 'thumbnail') AND `cpev_s`.`store_id` > 0 AND `cpev_s`.`value` != `cpev_0`.`value` AND `cpev_s`.`value` = 'no_selection';
 ```
